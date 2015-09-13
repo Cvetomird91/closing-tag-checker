@@ -22,7 +22,4 @@ foreach ($files as $d) {
 	}
 }	
 
-//print_r($files);
-
 print_r($with_tags);
-//print_r(gettype($with_tags[0])); 
