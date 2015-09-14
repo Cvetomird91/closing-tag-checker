@@ -30,7 +30,7 @@ class TokenChecker {
 				$this->with_t_closing[] = $files;
 			}
 		}
-
+	//check only if T_CLOSE_TAG is on the last line of the file
 		print_r($this->with_t_closing);
 	}
 
