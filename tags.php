@@ -34,14 +34,12 @@ class TokenChecker {
 		print_r($this->with_t_closing);
 	}
 
-	//idea: add second argument - an array which will be filled with the names of the files w/ T_CLOSING_TAG
-	//idea: unset values in $this->files where there is no closing tag
 	public function check_tokens ($file) {
 			$tokens = token_get_all(file_get_contents($file));
 			$lex = [];
 			foreach ($tokens as $token) {
 				$lex[]=$token[0];
-				if (in_array('376', $lex)){
+				if (end($lex) == '378'){
 						return $file;
 				}
 			}
