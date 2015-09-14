@@ -10,9 +10,10 @@ class TokenChecker {
 	// idea: SPL RecursiveDirectoryIterator for child directory check
 	public $dir;
 	public $files;
-	public $with_closing = array();
+	public $with_t_closing = array();
 
 	public function __construct($dir) {
+
 		$this->dir = $dir;
 		$files = scandir($this->dir);
 
@@ -23,8 +24,14 @@ class TokenChecker {
 			}
 		}
 		$this->files = $sort;
-		print_r($this->files);
 
+		foreach($this->files as $files) {
+			if ($this->check_tokens($files)) {
+				$this->with_t_closing[] = $files;
+			}
+		}
+
+		print_r($this->with_t_closing);
 	}
 
 	//idea: add second argument - an array which will be filled with the names of the files w/ T_CLOSING_TAG
@@ -32,21 +39,14 @@ class TokenChecker {
 	public function check_tokens ($file) {
 			$tokens = token_get_all(file_get_contents($file));
 			$lex = [];
-			$checked = array();
 			foreach ($tokens as $token) {
 				$lex[]=$token[0];
-				if (in_array('378', $lex)){
-						$checked[] = $files;
+				if (in_array('376', $lex)){
+						return $file;
 				}
 			}
-		return $checked;
 		}
+
 }
 
 $obj = new TokenChecker('./');
-
-//foreach ($obj->check_tokens($obj->files) as $f) {
-//	print_r($f);
-//}
-
-?>
