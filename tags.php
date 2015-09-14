@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tool for scanning PHP scripts for such with a closing tag 
+ * Tool for scanning for PHP scripts with a closing tag at the end of the file.
  * 
  * @copyright Tsvetomir Denchev
  * @author Tsvetomir Denchev
@@ -42,11 +42,11 @@ class TokenChecker {
 	 */
 
 	public function check_tokens($file) { 
- 			$tokens = token_get_all(file_get_contents($file));
-			$end = end($tokens);
-			if ($end[0] == '378') { 
-				return $file;	
-			}
+		$tokens = token_get_all(file_get_contents($file));
+		$end = end($tokens);
+		if ($end[0] == '378') { 
+			return $file;	
+		}
 	}
 
 }
