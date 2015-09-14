@@ -1,9 +1,12 @@
 <?php
 
-	/**
-	 *
-	 *
-	 */
+/**
+ * Tool for scanning PHP scripts for such with a closing tag 
+ * 
+ * @copyright Tsvetomir Denchev
+ * @author Tsvetomir Denchev
+ * @version	1.0
+ */
 
 class TokenChecker {
 
@@ -30,10 +33,13 @@ class TokenChecker {
 				$this->with_t_closing[] = $files;
 			}
 		}
-	//check only if T_CLOSE_TAG is on the last line of the file
-	//even if the last tokens are blank spaces
 		print_r($this->with_t_closing);
 	}
+
+	/** 
+	 * @file string
+	 * @returns string
+	 */
 
 	public function check_tokens($file) { 
  			$tokens = token_get_all(file_get_contents($file));
