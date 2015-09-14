@@ -31,19 +31,17 @@ class TokenChecker {
 			}
 		}
 	//check only if T_CLOSE_TAG is on the last line of the file
+	//even if the last tokens are blank spaces
 		print_r($this->with_t_closing);
 	}
 
-	public function check_tokens ($file) {
-			$tokens = token_get_all(file_get_contents($file));
-			$lex = [];
-			foreach ($tokens as $token) {
-				$lex[]=$token[0];
-				if (end($lex) == '378'){
-						return $file;
-				}
+	public function check_tokens($file) { 
+ 			$tokens = token_get_all(file_get_contents($file));
+			$end = end($tokens);
+			if ($end[0] == '378') { 
+				return $file;	
 			}
-		}
+	}
 
 }
 
