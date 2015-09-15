@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * Tool for scanning for PHP scripts with a closing tag at the end of the file.
  *
@@ -14,8 +15,9 @@ class TokenChecker {
 	private $dir;
 	private $files;
 	public $with_t_closing = array();
-	private $php_version;
-	private $t_closing_id;
+#	private $php_version;
+	public $t_closing_id;
+
 
 	public function __construct($dir) {
 		$this->dir = $dir;
@@ -30,6 +32,7 @@ class TokenChecker {
 			}
 		}
 		$this->files = $sort;
+		$this->check_php_version();
 
 		foreach($this->files as $files) {
 			if ($this->check_tokens($files)) {
@@ -44,17 +47,45 @@ class TokenChecker {
 	 * @returns string
 	 */
 
-	//add a check for PHP version and different token ids
-
 	public function check_tokens($file) {
 		$tokens = token_get_all(file_get_contents($file));
 		$end = end($tokens);
-		if ($end[0] == '376') {
+		if ($end[0] == $this->t_closing_id) {
 			return $file;
 		}
 	}
+	/**
+	 * @check_php_version void 
+	 * @returns void
+	 */
 
+	public function check_php_version () { 
+		$version = phpversion();
+		$toks = explode('.', $version);
+		$ver = floatval($toks[0].'.'.$toks[1]);
+		switch ($ver) { 
+			case 5.1:
+				$this->t_closing_id = 369;
+   			break;
+			case 5.2:
+				$this->t_closing_id = 369;
+			break;
+			case 5.3:
+				$this->t_closing_id = 370;
+			break;
+			case 5.4:
+				$this->t_closing_id = 374;
+			break;
+			case 5.5:
+				$this->t_closing_id = 378;
+			break;
+			case 5.6:
+				$this->t_closing_id = 378;
+			break;
+			default: 
+				$this->t_closing_id = 376;
+			break;
+			}
+		}
 }
-
 $obj = new TokenChecker('./');
-?>
