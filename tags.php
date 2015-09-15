@@ -2,7 +2,7 @@
 
 /**
  * Tool for scanning for PHP scripts with a closing tag at the end of the file.
- * 
+ *
  * @copyright Tsvetomir Denchev
  * @author Tsvetomir Denchev
  * @version	1.0
@@ -11,12 +11,12 @@
 class TokenChecker {
 
 	// idea: SPL RecursiveDirectoryIterator for child directory check
-	public $dir;
-	public $files;
+	private $dir;
+	private $files;
 	public $with_t_closing = array();
+	private $php_version;
 
 	public function __construct($dir) {
-
 		$this->dir = $dir;
 		$files = scandir($this->dir);
 
@@ -36,19 +36,22 @@ class TokenChecker {
 		print_r($this->with_t_closing);
 	}
 
-	/** 
-	 * @file string
+	/**
+	 * @check_tokens string
 	 * @returns string
 	 */
 
-	public function check_tokens($file) { 
+	//add a check for PHP version and different token ids
+
+	public function check_tokens($file) {
 		$tokens = token_get_all(file_get_contents($file));
 		$end = end($tokens);
-		if ($end[0] == '378') { 
-			return $file;	
+		if ($end[0] == '376') {
+			return $file;
 		}
 	}
 
 }
 
 $obj = new TokenChecker('./');
+?>
