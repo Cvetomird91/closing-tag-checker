@@ -15,9 +15,12 @@ class TokenChecker {
 	private $files;
 	public $with_t_closing = array();
 	private $php_version;
+	private $t_closing_id;
 
 	public function __construct($dir) {
 		$this->dir = $dir;
+#		$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->dir));
+
 		$files = scandir($this->dir);
 
 		$sort = array();
