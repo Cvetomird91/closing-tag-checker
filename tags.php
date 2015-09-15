@@ -88,4 +88,8 @@ class TokenChecker {
 			}
 		}
 }
-$obj = new TokenChecker('./');
+if (isset($argv[1])) { 
+	$obj = new TokenChecker($argv[1]);
+} else { 
+	$obj = new TokenChecker('./');
+}
