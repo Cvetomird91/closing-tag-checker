@@ -15,7 +15,6 @@ class TokenChecker {
 	private $dir;
 	private $files;
 	public $with_t_closing = array();
-	private $t_closing_id;
 
 	public function __construct($dir) {
 		$this->dir = $dir;
@@ -30,7 +29,6 @@ class TokenChecker {
 			}
 		}
 		$this->files = $sort;
-		$this->check_php_version();
 
 		foreach($this->files as $files) {
 			if ($this->check_tokens($files)) {
@@ -48,46 +46,16 @@ class TokenChecker {
 	public function check_tokens($file) {
 		$tokens = token_get_all(file_get_contents($file));
 		$end = end($tokens);
-		if ($end[0] == $this->t_closing_id) {
+		if ($end[0] == T_CLOSE_TAG){
 			return $file;
 		}
 	}
-	/**
-	 * @check_php_version void
-	 * @returns void
-	 */
 
-	private function check_php_version () {
-		$version = phpversion();
-		$toks = explode('.', $version);
-		$ver = floatval($toks[0].'.'.$toks[1]);
-		switch ($ver) {
-			case 5.1:
-				$this->t_closing_id = 369;
-   			break;
-			case 5.2:
-				$this->t_closing_id = 369;
-			break;
-			case 5.3:
-				$this->t_closing_id = 370;
-			break;
-			case 5.4:
-				$this->t_closing_id = 374;
-			break;
-			case 5.5:
-				$this->t_closing_id = 376;
-			break;
-			case 5.6:
-				$this->t_closing_id = 378;
-			break;
-			default:
-				$this->t_closing_id = 376;
-			break;
-			}
-		}
 }
+
 if (isset($argv[1])) {
 	$obj = new TokenChecker($argv[1]);
 } else {
 	$obj = new TokenChecker('./');
 }
+echo T_CLOSE_TAG;
