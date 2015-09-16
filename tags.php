@@ -54,8 +54,8 @@ class TokenChecker {
 }
 
 if (isset($argv[1])) {
-	$obj = new TokenChecker($argv[1]);
+	chdir($argv[1]);
+	$obj = new TokenChecker('./');
 } else {
 	$obj = new TokenChecker('./');
 }
-echo T_CLOSE_TAG;
