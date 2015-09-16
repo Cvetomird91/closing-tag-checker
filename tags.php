@@ -15,9 +15,7 @@ class TokenChecker {
 	private $dir;
 	private $files;
 	public $with_t_closing = array();
-#	private $php_version;
-	public $t_closing_id;
-
+	private $t_closing_id;
 
 	public function __construct($dir) {
 		$this->dir = $dir;
@@ -55,15 +53,15 @@ class TokenChecker {
 		}
 	}
 	/**
-	 * @check_php_version void 
+	 * @check_php_version void
 	 * @returns void
 	 */
 
-	public function check_php_version () { 
+	private function check_php_version () {
 		$version = phpversion();
 		$toks = explode('.', $version);
 		$ver = floatval($toks[0].'.'.$toks[1]);
-		switch ($ver) { 
+		switch ($ver) {
 			case 5.1:
 				$this->t_closing_id = 369;
    			break;
@@ -82,15 +80,14 @@ class TokenChecker {
 			case 5.6:
 				$this->t_closing_id = 378;
 			break;
-			default: 
+			default:
 				$this->t_closing_id = 376;
 			break;
 			}
 		}
 }
-if (isset($argv[1])) { 
+if (isset($argv[1])) {
 	$obj = new TokenChecker($argv[1]);
-} else { 
+} else {
 	$obj = new TokenChecker('./');
 }
-?>
