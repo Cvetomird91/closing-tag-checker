@@ -77,7 +77,7 @@ class TokenChecker {
 				$this->t_closing_id = 374;
 			break;
 			case 5.5:
-				$this->t_closing_id = 378;
+				$this->t_closing_id = 376;
 			break;
 			case 5.6:
 				$this->t_closing_id = 378;
@@ -93,3 +93,4 @@ if (isset($argv[1])) {
 } else { 
 	$obj = new TokenChecker('./');
 }
+?>
