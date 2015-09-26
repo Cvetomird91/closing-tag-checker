@@ -11,7 +11,6 @@
 
 class TokenChecker {
 
-	// idea: SPL RecursiveDirectoryIterator for child directory check
 	private $dir;
 	private $files;
 	public $with_t_closing = array();
@@ -19,8 +18,6 @@ class TokenChecker {
 	public function __construct($dir) {
 		$this->dir = $dir;
 		$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->dir));
-
-#		$files = scandir($this->dir);
 
 		$sort = array();
 		foreach ($files as $f) {
