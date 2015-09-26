@@ -24,8 +24,9 @@ class TokenChecker {
 
 		$sort = array();
 		foreach ($files as $f) {
-			if(preg_match('/.*\.php$/', $f->getFilename())) {
-					$sort[] = realpath($this->dir) . '/' . $f->getFilename();
+			$recursive = $f->getPathname();
+			if(preg_match('/.*\.php$/', $recursive)) {
+					$sort[] = str_replace ('./', realpath($this->dir) . '/', $recursive);
 			}
 		}
 		$this->files = $sort;
