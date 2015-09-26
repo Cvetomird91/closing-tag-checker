@@ -18,14 +18,14 @@ class TokenChecker {
 
 	public function __construct($dir) {
 		$this->dir = $dir;
-#		$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->dir));
+		$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->dir));
 
-		$files = scandir($this->dir);
+#		$files = scandir($this->dir);
 
 		$sort = array();
 		foreach ($files as $f) {
-			if(preg_match('/^.*\.php/', $f)) {
-					$sort[] = $f;
+			if(preg_match('/.*\.php$/', $f->getFilename())) {
+					$sort[] = realpath($this->dir) . '/' . $f->getFilename();
 			}
 		}
 		$this->files = $sort;
