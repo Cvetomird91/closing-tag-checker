@@ -27,7 +27,7 @@ class TokenChecker {
 
 		$sort = array();
 		foreach ($files as $f) {
-			if(preg_match('/^.*\.php/', $f) == 1) {
+			if(preg_match('/^.*\.php/', $f)) {
 					$sort[] = $f;
 			}
 		}
