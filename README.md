@@ -6,3 +6,5 @@ token.
 Portability was added because of different token ids for T_CLOSE_TAG inbetween different PHP versions.
 
 The script prints an array with the files containing a closing PHP tag at EOF.
+
+Sample files have been added.
