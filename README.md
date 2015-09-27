@@ -12,4 +12,4 @@ Basic usage:
 
 		$ php tags.php project-directory/
 
-If a directory name isn't passed to the script as first argument, it will scan the current direcory.
+If a directory name isn't passed to the script as first argument, it will scan the current directory.
