@@ -10,6 +10,6 @@ Sample files have been added for demonstrational purposes.
 
 Basic usage:
 
-		$ **php tags.php project-directory/**
+		$ php tags.php project-directory/
 
 If a directory name isn't passed to the script as first argument, it will scan the current direcory.
