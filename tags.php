@@ -17,10 +17,10 @@ class TokenChecker {
 
 	//exclude directory/directories
 
-	public function __construct($dir, $recursive){
+	public function __construct($dir, $recursive_check){
 		$this->dir = $dir;
 
-		if ($recursive == true) {
+		if ($recursive_check) {
 			$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->dir));
 		} else {
 			$files = scandir($this->dir);
@@ -29,7 +29,11 @@ class TokenChecker {
 
 		$sort = array();
 		foreach ($files as $f) {
-			$recursive = $f->getPathname();
+			if ($recursive_check) { 
+				$recursive = $f->getPathname();
+			} else { 
+				$recursive = $f;
+			}
 			if(preg_match('/.*\.php$/', $recursive)) {
 					$sort[] = str_replace ('./', realpath($this->dir) . '/', $recursive);
 			}
@@ -61,7 +65,7 @@ class TokenChecker {
 
 if (isset($argv[1])) {
 	chdir($argv[1]);
-	$obj = new TokenChecker('./', true);
+	$obj = new TokenChecker('./', false);
 } else {
-	$obj = new TokenChecker('./', true);
+	$obj = new TokenChecker('./', false);
 }
