@@ -15,9 +15,17 @@ class TokenChecker {
 	private $files;
 	public $with_t_closing = array();
 
-	public function __construct($dir) {
+	//exclude directory/directories
+
+	public function __construct($dir, $recursive){
 		$this->dir = $dir;
-		$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->dir));
+
+		if ($recursive == true) {
+			$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->dir));
+		} else {
+			$files = scandir($this->dir);
+		}
+
 
 		$sort = array();
 		foreach ($files as $f) {
@@ -53,7 +61,7 @@ class TokenChecker {
 
 if (isset($argv[1])) {
 	chdir($argv[1]);
-	$obj = new TokenChecker('./');
+	$obj = new TokenChecker('./', true);
 } else {
-	$obj = new TokenChecker('./');
+	$obj = new TokenChecker('./', true);
 }
