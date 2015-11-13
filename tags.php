@@ -50,11 +50,31 @@ class TokenChecker {
 	 */
 
 	public function check_tokens($file) {
-		$tokens = token_get_all(file_get_contents($file));
+		$tokens = file_get_contents($file);
+		$tokens = token_get_all($tokens);
+
 		$end = end($tokens);
 		if ($end[0] == T_CLOSE_TAG){
 			return $file;
 		}
+	}
+
+	/**
+	 * Checks if the last line contains a PHP closing and opening tag on the last line
+	 * @check_for_one_liner string
+	 * @returns string
+	 */
+
+	public function check_for_one_liner($file) {
+
+		$tokens = file_get_contents($file);
+		$tokens = token_get_all($tokens);
+
+		$lines = array_column($tokens, 2);
+
+		$all_lines = array_unique($lines);
+		$last_line = max($all_lines);
+
 	}
 
 }
