@@ -5,6 +5,4 @@ phpinfo();
 
 <a href="">
 
-<?php
-
-?>
+<?php echo 'last line'; ?>
