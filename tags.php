@@ -36,7 +36,7 @@ class TokenChecker {
 		$this->files = $sort;
 
 		foreach($this->files as $file) {
-			if ($this->check_tokens($file) /* && ($this->check_for_one_liner($file) == false) */){
+			if ($this->check_tokens($file) && ($this->check_for_one_liner($file) == false)){
 				$this->with_t_closing[] = $file;
 			}
 		}
@@ -80,17 +80,18 @@ class TokenChecker {
 			$has_open_tag = '';
 			$has_closing_tag = '';
 
-			if ($token[2] == $last_line && ($token[0] == T_OPEN_TAG || $token[0] == T_OPEN_TAG_WITH_ECHO)) {
+			if (is_array($token) && $token[2] == $last_line && ($token[0] == T_OPEN_TAG || $token[0] == T_OPEN_TAG_WITH_ECHO)) {
 				$has_open_tag = true;
 			}
 
-			if ($token[2] == $last_line && $token[0] == T_CLOSE_TAG) {
+			if (is_array($token) && $token[2] == $last_line && $token[0] == T_CLOSE_TAG) {
 				$has_closing_tag = true;
 			}
 
 			if ($has_open_tag && $has_closing_tag) {
 				return true;
 			} 
+			return false;
 		}
 
 	//add check for tokens T_OPEN_TAG, T_OPEN_TAG_WITH_ECHO and T_CLOSE_TAG on the same line
