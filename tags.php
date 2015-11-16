@@ -26,7 +26,6 @@ class TokenChecker {
 			$files = scandir($this->dir);
 		}
 
-
 		$sort = array();
 		foreach ($files as $f) {
 			$recursive = $f->getPathname();
@@ -36,9 +35,9 @@ class TokenChecker {
 		}
 		$this->files = $sort;
 
-		foreach($this->files as $files) {
-			if ($this->check_tokens($files)) {
-				$this->with_t_closing[] = $files;
+		foreach($this->files as $file) {
+			if ($this->check_tokens($file) /* && ($this->check_for_one_liner($file) == false) */){
+				$this->with_t_closing[] = $file;
 			}
 		}
 		print_r($this->with_t_closing);
@@ -71,11 +70,44 @@ class TokenChecker {
 		$tokens = token_get_all($tokens);
 
 		$lines = array_column($tokens, 2);
-
 		$all_lines = array_unique($lines);
 		$last_line = max($all_lines);
 
-	}
+		$has_open_tag = '';
+		$has_closing_tag = '';
+
+		foreach ($tokens as $token) { 
+			$has_open_tag = '';
+			$has_closing_tag = '';
+
+			if ($token[2] == $last_line && ($token[0] == T_OPEN_TAG || $token[0] == T_OPEN_TAG_WITH_ECHO)) {
+				$has_open_tag = true;
+			}
+
+			if ($token[2] == $last_line && $token[0] == T_CLOSE_TAG) {
+				$has_closing_tag = true;
+			}
+
+			if ($has_open_tag && $has_closing_tag) {
+				return true;
+			} 
+		}
+
+	//add check for tokens T_OPEN_TAG, T_OPEN_TAG_WITH_ECHO and T_CLOSE_TAG on the same line
+
+	/*	$last_line_tokens = array();
+
+		$flipped = array_reverse($lines); 
+
+	foreach($flipped as $flip){ 
+		 	if ($flip == $last_line) 
+		 		{ 
+		 			$last_line_tokens[] = $flip; 
+		 		} else { 
+		 			break;  
+		 		}
+		 } */
+	}	 
 
 }
 
