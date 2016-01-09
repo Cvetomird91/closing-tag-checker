@@ -70,46 +70,24 @@ class TokenChecker {
 		$tokens = token_get_all($tokens);
 
 		$lines = array_column($tokens, 2);
-		$all_lines = array_unique($lines);
-		$last_line = max($all_lines);
+		$last_line = max($lines);
 
-		$has_open_tag = '';
-		$has_closing_tag = '';
+		$last_line_tokens = array();
 
-		foreach ($tokens as $token) { 
-			$has_open_tag = '';
-			$has_closing_tag = '';
-
-			if (is_array($token) && $token[2] == $last_line && ($token[0] == T_OPEN_TAG || $token[0] == T_OPEN_TAG_WITH_ECHO)) {
-				$has_open_tag = true;
+		foreach ($tokens as $token) {
+			if (is_array($token) && $token[2] == 8) {
+				$last_line_tokens[] = $token[0];
 			}
-
-			if (is_array($token) && $token[2] == $last_line && $token[0] == T_CLOSE_TAG) {
-				$has_closing_tag = true;
-			}
-
-			if ($has_open_tag && $has_closing_tag) {
-				return true;
-			} 
-			return false;
 		}
 
-	//add check for tokens T_OPEN_TAG, T_OPEN_TAG_WITH_ECHO and T_CLOSE_TAG on the same line
+		if (in_array(T_OPEN_TAG, $last_line_tokens) && in_array(T_CLOSE_TAG, $last_line_tokens)) {
+			return true;
+		}
 
-	/*	$last_line_tokens = array();
-
-		$flipped = array_reverse($lines); 
-
-	foreach($flipped as $flip){ 
-		 	if ($flip == $last_line) 
-		 		{ 
-		 			$last_line_tokens[] = $flip; 
-		 		} else { 
-		 			break;  
-		 		}
-		 } */
-	}	 
-
+		if (in_array(T_OPEN_TAG_WITH_ECHO, $last_line_tokens) && in_array(T_CLOSE_TAG, $last_line_tokens)) {
+			return true;
+		}
+	}
 }
 
 if (isset($argv[1])) {
