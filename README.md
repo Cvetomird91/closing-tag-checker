@@ -6,6 +6,8 @@ Portability was added because of different token ids for T_CLOSE_TAG inbetween d
 
 The script prints an array with the files containing a closing PHP tag at EOF.
 
+Files who contain an opening and a closing tag on the last line will not be printed.
+
 Sample files have been added for demonstrational purposes.
 
 Basic usage:
