@@ -58,8 +58,6 @@ class TokenChecker {
 		}
 	}
 
-<<<<<<< HEAD
-=======
 	/**
 	 * Checks if the last line contains a PHP closing and opening tag on the last line
 	 * @check_for_one_liner string
@@ -90,7 +88,7 @@ class TokenChecker {
 			return true;
 		}
 	}
->>>>>>> last-line
+
 }
 
 if (isset($argv[1])) {
