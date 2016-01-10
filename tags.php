@@ -58,6 +58,39 @@ class TokenChecker {
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	/**
+	 * Checks if the last line contains a PHP closing and opening tag on the last line
+	 * @check_for_one_liner string
+	 * @returns string
+	 */
+
+	public function check_for_one_liner($file) {
+
+		$tokens = file_get_contents($file);
+		$tokens = token_get_all($tokens);
+
+		$lines = array_column($tokens, 2);
+		$last_line = max($lines);
+
+		$last_line_tokens = array();
+
+		foreach ($tokens as $token) {
+			if (is_array($token) && $token[2] == 8) {
+				$last_line_tokens[] = $token[0];
+			}
+		}
+
+		if (in_array(T_OPEN_TAG, $last_line_tokens) && in_array(T_CLOSE_TAG, $last_line_tokens)) {
+			return true;
+		}
+
+		if (in_array(T_OPEN_TAG_WITH_ECHO, $last_line_tokens) && in_array(T_CLOSE_TAG, $last_line_tokens)) {
+			return true;
+		}
+	}
+>>>>>>> last-line
 }
 
 if (isset($argv[1])) {
