@@ -36,7 +36,7 @@ class TokenChecker {
 		$this->files = $sort;
 
 		foreach($this->files as $file) {
-			if ($this->check_tokens($file)){
+			if ($this->check_tokens($file) && !$this->check_for_one_liner($file)){
 				$this->with_t_closing[] = $file;
 			}
 		}
