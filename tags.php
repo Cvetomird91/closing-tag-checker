@@ -15,9 +15,17 @@ class TokenChecker {
 	private $files;
 	public $with_t_closing = array();
 
-	//exclude directory/directories
-
 	public function __construct($dir, $recursive){
+		$this->find_files_with_closing_tag($dir, $recursive);
+	}
+
+	/**
+	 * @check_tokens string
+	 * @returns string
+	 */
+
+	public function find_files_with_closing_tag($dir, $recursive) {
+
 		$this->dir = $dir;
 
 		if ($recursive == true) {
@@ -42,11 +50,6 @@ class TokenChecker {
 		}
 		print_r($this->with_t_closing);
 	}
-
-	/**
-	 * @check_tokens string
-	 * @returns string
-	 */
 
 	public function check_tokens($file) {
 		$tokens = file_get_contents($file);
