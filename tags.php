@@ -11,18 +11,18 @@
 
 class TokenChecker {
 
-	private $dir;
-	private $files;
-	public $with_t_closing = array();
+    private $dir;
+    private $files;
+    public $with_t_closing = array();
 
-	public function __construct($dir, $recursive){
-		$this->find_files_with_closing_tag($dir, $recursive);
-	}
+    public function __construct($dir, $recursive){
+        $this->find_files_with_closing_tag($dir, $recursive);
+    }
 
-	/**
-	 * @check_tokens string
-	 * @returns string
-	 */
+    /**
+     * @check_tokens string
+     * @returns string
+     */
 
 	public function find_files_with_closing_tag($dir, $recursive) {
 
