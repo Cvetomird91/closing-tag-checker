@@ -1,7 +1,6 @@
 #!/usr/bin/env php
 <?php
 
-
 /**
  * Tool for scanning for PHP scripts with a closing tag at the end of the file.
  *
