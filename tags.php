@@ -94,7 +94,9 @@ class TokenChecker {
 				$this->with_t_closing[] = $file;
 			}
 		}
-		print_r($this->with_t_closing);
+
+		foreach($this->with_t_closing as $filename)
+			print($filename."\n");
 	}
 
 }
