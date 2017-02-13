@@ -43,12 +43,8 @@ class TokenChecker {
 		}
 		$this->files = $sort;
 
-		foreach($this->files as $file) {
-			if ($this->check_tokens($file) && !$this->check_for_one_liner($file)){
-				$this->with_t_closing[] = $file;
-			}
-		}
-		print_r($this->with_t_closing);
+		$this->print_file_names();
+
 	}
 
 	public function check_tokens($file) {
@@ -90,6 +86,15 @@ class TokenChecker {
 		if (in_array(T_OPEN_TAG_WITH_ECHO, $last_line_tokens) && in_array(T_CLOSE_TAG, $last_line_tokens)) {
 			return true;
 		}
+	}
+
+	private function print_file_names() {
+		foreach($this->files as $file) {
+			if ($this->check_tokens($file) && !$this->check_for_one_liner($file)){
+				$this->with_t_closing[] = $file;
+			}
+		}
+		print_r($this->with_t_closing);
 	}
 
 }
