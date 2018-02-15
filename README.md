@@ -17,10 +17,3 @@ Basic usage:
 If a directory name isn't passed to the script as first argument, it will scan the current directory.
 
 The actual tag checker is the tags.php script. The rest of the files are added for various test cases.
-
-|-- db
-|   `-- connection.php
-|-- index.php
-|-- new-file.php
-|-- README.md
-`-- tags.php
