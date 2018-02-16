@@ -8,7 +8,7 @@ before_install:
     sudo apt-get update -q
 
 script:
-    php tags.php
+    time php tags.php
 
 notifications:
     email:
